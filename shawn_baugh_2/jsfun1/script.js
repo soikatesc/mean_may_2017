@@ -20,21 +20,24 @@ function minimum() {
     } console.log(min)
 }
 minimum()
+console.log('BREAK**********');
 // average
-function avg() {
-    var y = [1, 5, 90, 25, -3, 0]
-    for(var i = 1; i < y.length; i++){
-        i = i + i
-    } console.log(i/y.length)
+function avg(y) {
+    var sum = 0;
+    for(var i = 0; i < y.length; i++){
+        sum = sum + y[i];
+    }
+    var avg = sum/y.length
+    console.log(avg)
 }
-avg()
+avg([1, 5, 90, 25, -3, 0])
 
-var newNinja = {
- name: 'Jessica',
- profession: 'coder',
- favorite_language: 'JavaScript', //like that's even a question!
- dojo: 'Dallas'
-}
-for(var key in newNinja){
-    console.log(key, newNinja[key])
-}
+// var newNinja = {
+//  name: 'Jessica',
+//  profession: 'coder',
+//  favorite_language: 'JavaScript', //like that's even a question!
+//  dojo: 'Dallas'
+// }
+// for(var key in newNinja){
+//     console.log(key, newNinja[key])
+// }
