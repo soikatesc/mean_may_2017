@@ -1,0 +1,4 @@
+Find all my MEAN assignments here
+=================================
+
+DAY 1 - JSFundamental PARTS 1,2 and 3; Be The Interpreter; Build Some Functions; Creating Objects
