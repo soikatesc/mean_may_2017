@@ -1,0 +1,20 @@
+
+dashboard!!
+<div ng-init="UC.session()">
+	<a href="#" ng-click="UC.logout()">Logout</a>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var socket = io.connect()
+			$('#button').click(function(){
+				console.log('hit button')
+				socket.emit("click", {reason: 'blue'})
+			})
+		})
+
+
+	</script>
+	<button id="button" type="button">Push this button</button>
+
+
+
+</div>
