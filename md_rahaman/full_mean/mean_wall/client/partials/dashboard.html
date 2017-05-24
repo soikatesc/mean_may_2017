@@ -1,0 +1,52 @@
+<div ng-init="UC.session()">
+	<a href="#" ng-click="UC.logout()">Logout</a>
+	<h1>Welcome {{UC.current_user.first_name}} {{UC.current_user.last_name}}</h1>
+	<h1>The Dojo message board</h1>
+</div>
+
+<div ng-controller="MessagesController as MC">
+	<div ng-init="MC.index()">
+		<form ng-submit="MC.createMessage(MC.newMessage)">
+	         <div class="form-group">
+	            <label for="body">
+	                <span class="label-text">Message:</span> 
+	            </label>
+	            <textarea ng-model="MC.newMessage.content" class="content form-control" id="content" name="content" rows="3"></textarea>            
+	        </div>
+	        <input type="submit" class="btn btn-lg btn-primary" value="Post a message">
+	    </form>
+	    <hr>
+
+		<h2>Messages</h2>
+		<div ng-repeat="message in MC.messages">
+			<div ng-init="index = $index">
+				<h3>User_id: {{message.user._id}}</h3>
+				<h3>User Name:{{message.user.first_name}}</h3>
+				<h3>Message: {{message.content}}</h3>
+				<h3>Message_id: {{message._id}}</h3>
+				<button ng-click="MC.deleteMessage(message._id)" class="btn btn-lg btn btn-danger">Delete</button>
+			</div>
+			<div class="comments" ng-repeat="comment in message.comments">
+				<h4>user_id: {{comment.user._id}}</h4>
+   				<h4>Name: {{comment.user.first_name}}</h4>
+   				<h4>Comment: {{comment.comments}}</h4>
+   				<h4>Likes: {{comment.likes}}</h4>
+   				<button ng-click="MC.addingLike(comment._id)" class="btn btn-lg btn btn-info">Like</button>
+   				<button ng-click="MC.deleteComment(comment._id)" class="btn btn-lg btn btn-danger">Delete</button>
+   				<hr>
+   			</div>
+			<div class="comments">
+				<form ng-submit="MC.createComment(MC.newComment, message._id, index)">
+					<div class="form-group">
+                            <label for="comment">
+                                <span class="label-text">Comment:</span> 
+                            </label>
+                            <textarea ng-model="MC.newComment[index].comments" class="comment form-control" id="comment" name="comment" rows="3"></textarea>                            
+                    </div>
+                     <input type="submit" class="btn btn-lg btn btn-info" value="Post comment">
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
