@@ -26,4 +26,3 @@ var TopicSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 mongoose.model('Topic', TopicSchema)
-var Topic = mongoose.model('Topic')
