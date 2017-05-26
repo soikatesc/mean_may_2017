@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var User = mongoose.model('User')
+var bcrypt = require('bcryptjs')
 
 
 module.exports = {
@@ -22,6 +23,7 @@ module.exports = {
 		// 		}
 		// 	})
 		// }
+		req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 		User.create(req.body, function(err, user){
 			if(err){
 				return res.json(err)

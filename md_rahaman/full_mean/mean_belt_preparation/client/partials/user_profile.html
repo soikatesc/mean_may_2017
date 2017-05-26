@@ -1,12 +1,16 @@
 User Profile !!!
+<div ng-init="UC.session()">
+	<button ng-click="UC.logout()">Logout</button>
+	<h1>Welcome {{UC.current_user.username}} </h1>
+</div>
+
 <div ng-init="UC.show()">
 	<h1>Username: </h1>
 	<h2>Posted</h2>
-	<ul>
-		{{UC.user}}
-		<li>Topic</li>
-		<li>Posts</li>
-		<li>Comment</li>
+	<ul >
+		<li>{{UC.user.topics.length}} Topic</li>
+		<li>{{UC.user.answers.length}} Posts</li>
+		<li>{{UC.user.comments.length}} Comment</li>
 	</ul>
 
 </div>

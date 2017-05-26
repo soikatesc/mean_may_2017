@@ -61,9 +61,9 @@ UserSchema.methods.authenticate = function(password){
 	return bcrypt.compareSync(password, this.password)
 }
 
-UserSchema.pre('save', function(callback){
-	this.hashPassword(this.password)
-	callback()
-})
+// UserSchema.pre('save', function(callback){
+// 	this.hashPassword(this.password)
+// 	callback()
+// })
 
 mongoose.model('User', UserSchema)

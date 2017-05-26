@@ -6,6 +6,7 @@
 
 <div ng-controller="TopicController as TC">
 	<h1>Add a topic</h1>
+	Search Topic: <input type="text" ng-model="TC.x">
 	<div ng-init="TC.index()">
 		<div>
 			<table>
@@ -15,12 +16,12 @@
 					<th>User Name</th>
 					<th>Posts</th>
 				</tr>
-				<tr ng-repeat="topic in TC.topics">
-					{{topic}}
+				<tr ng-repeat="topic in TC.topics | filter:TC.x">
+					<!-- {{topic}} -->
 					<td>{{topic.category}}</td>
 					<td><a href="#!/topic/{{topic._id}}">{{topic.title}}</a></td>
 					<td><a href="#!/userProfile/{{topic.user._id}}">{{topic.user.username}}</a></td>
-					<td></td>
+					<td>{{topic.answers.length}}</td>
 				</tr>
 			</table>
 			<hr>

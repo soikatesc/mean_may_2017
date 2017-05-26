@@ -20,12 +20,24 @@ var AnswerSchema = new mongoose.Schema({
 		ref: 'Comment'
 	}],
 	likes: {
-		type: Number,
-		default: 0
+		count:{
+			type: Number,
+			default: 0
+		},
+		users: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		}]
 	},
 	dislikes: {
-		type: Number,
-		default: 0
+		count:{
+			type: Number,
+			default: 0
+		},
+		users: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		}]
 	}
 }, { timestamps: true })
 

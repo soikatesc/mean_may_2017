@@ -15,7 +15,7 @@ module.exports = function(app){
 	//topic route
 	app.get('/topics', Topics.index)
 	app.post('/topics', Topics.create)
-	app.get('/topic/show/:id', Topics.show)
+	app.get('/topics/show/:id', Topics.show)
 	app.delete('/topics/:id', Topics.destroy)
 
 	//answers route

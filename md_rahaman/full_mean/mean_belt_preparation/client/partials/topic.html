@@ -1,7 +1,53 @@
-Topic page
 <a href="#!/dashboard">Dashboard</a>
-<div ng-init="TC.show()">
+<div ng-controller="UsersController as UC">
+	<div ng-init="UC.session()">
+		<button ng-click="UC.logout()">Logout</button>
+		<h1>Welcome {{UC.current_user.username}} </h1>
+	</div>
 
 
+	<div ng-init="TC.show()">
+		<h1>Topics</h1>
+		<h2>{{TC.topic.user.username}} posted a topic:</h2>
+		<h3>{{TC.topic.title}}</h3>
+		<h4>{{TC.topic.description}}</h4>
+		<h3>{{TC.topic.createdAt | date: "MMMM d,y h:mm a": 'UTC'}}</h3>
+		<hr>
+		<div class="comments">
+			<form ng-submit="TC.createAnswer(TC.newAnswer, TC.topic._id)">
+				<div class="form-group">
+	                    <label for="answer">
+	                        <span class="label-text">Post your answer here:</span> 
+	                    </label>
+	                    <textarea ng-model="TC.newAnswer.content" class="answer form-control" id="answer" name="answer" rows="3"></textarea>                            
+	            </div>
+	             <input type="submit" class="btn btn-lg btn btn-info" value="Post">
+			</form>
+			<hr>
+		</div>
+		<div class="comments" ng-repeat="answer in TC.topic.answers | orderBy: '-createdAt'">
+			<h3>{{answer.content}}</h3>
+			<h3>{{answer.createdAt | date: "MMMM d,y h:mm a": 'UTC'}}</h3>
+			<h3>Likes: {{answer.likes.count}}</h3>
+			<h3>Dislikes: {{answer.dislikes.count}}</h3>
+			<button ng-if="answer.likes.users.indexOf(UC.current_user._id) == -1" ng-click="TC.likes(answer._id)" class="btn btn-info">Like</button>
+			<button ng-if="answer.dislikes.users.indexOf(UC.current_user._id) == -1" ng-click="TC.dislikes(answer._id)" class="btn btn-danger">Dislike</button>
+			<!-- {{answer.comments}} -->
+			<ul ng-repeat="comment in answer.comments">
+				<li>{{comment.content}}</li>
+			</ul>
 
+			
+
+			<form ng-init="index=$index" ng-submit="TC.createComment(TC.newComment, answer._id, index)">
+				<div class="form-group">
+	                    <textarea ng-model="TC.newComment.content[index]" class="comment form-control" id="comment" name="comment" rows="3"></textarea>                            
+	            </div>
+	             <input type="submit" class="btn btn-lg btn btn-info" value="Comment">
+			</form>
+			<hr>
+
+		</div>
+
+	</div>
 </div>

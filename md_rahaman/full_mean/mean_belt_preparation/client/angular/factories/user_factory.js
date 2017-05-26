@@ -10,7 +10,7 @@ app.factory('UserFactory', function($http, $cookies){
 		if(!user_id){
 			return callback(false)
 		}
-		$http.get('/users/' + user_id).then(function(res){
+		$http.get('/users/show/' + user_id).then(function(res){
 			if(res.data.errors){
 				return callback(false)
 			}

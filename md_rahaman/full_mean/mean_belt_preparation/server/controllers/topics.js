@@ -4,7 +4,7 @@ var User = mongoose.model('User')
 
 module.exports = {
 	index: function(req, res){
-		console.log('hitting creating topics route')
+		console.log('hitting topics index route')
 		Topic.find({}).populate('user').populate({
 			path: 'answers',
 			model: 'Answer',
@@ -29,6 +29,7 @@ module.exports = {
 	},
 
 	create: function(req, res){
+		console.log(req.body)
 		Topic.create(req.body, function(err, topic){
 			if(err){
 				return res.json(err)
