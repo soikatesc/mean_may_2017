@@ -51,44 +51,56 @@ module.exports = {
 		})
 	},
 	likes: function(req, res){
-		Answer.findById(req.params.id).exec(function(err, answer){
+		Answer.findByIdAndUpdate(req.params.id, { $inc: { "likes.count": 1 }, $push: { "likes.users": req.body.user }}, { new: true }, function(err, answer){
 			if(err){
-				return res.json(err)
+				return res.json(err);
 			}
-			if(!answer){
-				return res.json({
-					"errors": "404 - answer not found"
-				})
-			}
-			answer.likes++
-			answer.save(function(err, answer){
-				if(err){
-					return res.json(err)
-				}
-				return res.json(answer)
-			})
-
+			return res.json(answer);
 		})
+		// Answer.findById(req.params.id).exec(function(err, answer){
+		// 	if(err){
+		// 		return res.json(err)
+		// 	}
+		// 	if(!answer){
+		// 		return res.json({
+		// 			"errors": "404 - answer not found"
+		// 		})
+		// 	}
+		// 	answer.likes.count++
+		// 	answer.save(function(err, answer){
+		// 		if(err){
+		// 			return res.json(err)
+		// 		}
+		// 		return res.json(answer)
+		// 	})
+
+		// })
 	},
 	dislikes: function(req, res){
-		Answer.findById(req.params.id).exec(function(err, answer){
+		Answer.findByIdAndUpdate(req.params.id, { $inc: { "dislikes.count": 1 }, $push: { "dislikes.users": req.body.user }}, { new: true }, function(err, answer){
 			if(err){
-				return res.json(err)
+				return res.json(err);
 			}
-			if(!answer){
-				return res.json({
-					"errors": "404 - answer not found"
-				})
-			}
-			answer.dislikes++
-			answer.save(function(err, answer){
-				if(err){
-					return res.json(err)
-				}
-				return res.json(answer)
-			})
-
+			return res.json(answer);
 		})
+		// Answer.findById(req.params.id).exec(function(err, answer){
+		// 	if(err){
+		// 		return res.json(err)
+		// 	}
+		// 	if(!answer){
+		// 		return res.json({
+		// 			"errors": "404 - answer not found"
+		// 		})
+		// 	}
+		// 	answer.dislikes++
+		// 	answer.save(function(err, answer){
+		// 		if(err){
+		// 			return res.json(err)
+		// 		}
+		// 		return res.json(answer)
+		// 	})
+
+		// })
 	},
 	destroy: function(req, res){
 		Answer.findByIdAndRemove(req.params.id, function(err, answer){
