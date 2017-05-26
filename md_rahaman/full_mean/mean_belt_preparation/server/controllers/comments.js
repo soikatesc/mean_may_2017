@@ -7,6 +7,7 @@ var User = mongoose.model('User')
 module.exports = {
 	create: function(req, res){
 		console.log('hitting creating comment route')
+		console.log(req.params.id)
 		Answer.findById(req.params.id).exec(function(err, answer){
 			if(err){
 				return res.json(err)
